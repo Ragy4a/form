@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Flex</title>
+    <script defer src="./src/index.js"></script>
+    <link rel="shortcut icon" href="./assets/icons/jsIcon.png" type="image/png">
+    <link rel="stylesheet" href="./assets/style/index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Create an Account</h1>
+                <p>Here you can write down your information.</p>
+            </div>
+            <form>
+                <div class="first-container inputs-container">
+                    <input id="first-name" type="text" placeholder="First Name">
+                    <input id="last-name" type="text" placeholder="Last Name">
+                    <input class="password" id="password" type="password" placeholder="Password">
+                </div>
+                <div class="second-container inputs-container">
+                    <input id="display-name" type="text" placeholder="Display Name">
+                    <input id="email" type="email" placeholder="Email">
+                    <input class="password" id="password-confirmation" type="password" placeholder="Password Confirmation">
+                </div>
+            </form>
+            <div class="error-window">
+                <p></p>
+            </div>
+            <div class="button-container">
+                <button id="ok-button">Ok</button>
+                <button id="cancel-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

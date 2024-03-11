@@ -1,0 +1,120 @@
+*{
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: rgb(11, 14, 39);
+    --form-background-color: rgb(9, 98, 180);
+    --header-text-color: #fff;
+    --ok-button-color: rgb(3, 151, 10);
+    --ok-button-hover-color: rgb(53, 206, 60);
+    --cancel-button-color: rgb(182, 9, 52);
+    --cancel-button-hover-color: rgb(206, 29, 53);
+}
+
+::selection {
+    background-color: #ffcc00;
+    color: #333;
+}
+
+body {
+  width: 100dvw;  
+  height: 100dvh;
+  margin: 0;
+}
+
+.form-header {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--header-text-color);
+    margin-left: -30px;
+}
+
+.container {
+    background-color: var(--background-color);
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    border: solid white 3px;
+    border-radius: 10px;
+    padding-left: 55px;
+    background-color: var(--form-background-color);
+    width: 600px;
+    height: 800px;
+}
+
+.first-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 300px;
+    margin-bottom: -311px;
+}
+
+.second-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 300px;
+}
+.inputs-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.inputs-container > input {
+    font-size: 0.9rem;
+    width: 200px;
+    height: 50px;
+    padding: 20px;    
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.error-window {
+    height: 30px;
+}
+
+.error-window > p {
+    color: red;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#ok-button, #cancel-button {
+    margin-top: 60px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+#ok-button {
+    margin-left: -45px;
+    background-color: var(--ok-button-color);
+}
+
+#ok-button:hover {
+    background-color: var(--ok-button-hover-color);
+}
+
+#cancel-button {
+    margin-left: 35px;
+    background-color: var(--cancel-button-color);
+}
+
+#cancel-button:hover {
+    background-color: var(--cancel-button-hover-color);
+}
