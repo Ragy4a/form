@@ -18,12 +18,14 @@ function checkPassword() {
         const passwordPattern = /^[^&.,%$#@!*]+$/;
         const password = document.getElementById('password').value;
         const passwordConfirmation = document.getElementById('password-confirmation').value;
-        if (passwordPattern.test(password) && passwordPattern.test(passwordConfirmation)) {
-            if (password !== passwordConfirmation) {
-                throw new Error('Passwords do not match.');
-            }
-        } else {
-            throw new Error('Password is not right!');
+        if (password.length < 8 || password.length > 20 || passwordConfirmation.length < 8 || passwordConfirmation.length > 20) {
+            throw new Error('Password must be between 8 and 20 characters long.');
+        }
+        if (!passwordPattern.test(password) || !passwordPattern.test(passwordConfirmation)) {
+            throw new Error('Password contains invalid characters.');
+        }
+        if (password !== passwordConfirmation) {
+            throw new Error('Passwords do not match.');
         }
         passwordError.textContent = '';
         hasErrors = false; 
