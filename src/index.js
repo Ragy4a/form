@@ -1,17 +1,11 @@
 'use strict';
 
-const firstNameInput = document.getElementById('first-name');
-const lastNameInput = document.getElementById('last-name');
-const password = document.getElementById('password');
-const displayNameInput = document.getElementById('display-name');
-const emailInput = document.getElementById('email');
-const passwordConfirmationInput = document.getElementById('password-confirmation');
-const errorInformation = document.querySelector('.error-window > p')
-const okButton = document.getElementById('ok-button');
-const cancelButton = document.getElementById('cancel-button')
+const errorInformation = document.querySelector('.error-window > p');
+const passwordError = document.querySelector('.error-window > p:last-child');
+let hasErrors = false;
 
 class Person {
-    constructor (fName, lName, dName, email) {
+    constructor(fName, lName, dName, email) {
         this.fName = fName;
         this.lName = lName;
         this.dName = dName;
@@ -19,21 +13,66 @@ class Person {
     }
 }
 
-function getInformation (event) {
+function checkPassword() {
     try {
-        const fName = firstNameInput.value;
-        const lName = lastNameInput.value;
-        const dName = displayNameInput.value;
-        const email = emailInput.value;
-        const User = new Person(fName, lName, dName, email)
-        if (fName === '' || lName === '' || dName === '' || email === '') {
-            throw new Error('Wrong information.');
-        } 
-        localStorage.setItem(lName, JSON.stringify(User))
+        const passwordPattern = /^[^&.,%$#@!*]+$/;
+        const password = document.getElementById('password').value;
+        const passwordConfirmation = document.getElementById('password-confirmation').value;
+        if (passwordPattern.test(password) && passwordPattern.test(passwordConfirmation)) {
+            if (password !== passwordConfirmation) {
+                throw new Error('Passwords do not match.');
+            }
+        } else {
+            throw new Error('Password is not right!');
+        }
+        passwordError.textContent = '';
+        hasErrors = false; 
     } catch (error) {
-        errorInformation.textContent = `${error}`
+        passwordError.textContent = error.message;
+        hasErrors = true; 
     }
 }
 
-okButton.addEventListener('click', getInformation)
-cancelButton.addEventListener('click', () => document.querySelector('form').reset())
+function validateEmail() {
+    try {
+        const email = document.getElementById('email').value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            throw new Error('Email is not correct.');
+        }
+        errorInformation.textContent = '';
+        hasErrors = false;
+    } catch (error) {
+        errorInformation.textContent = error.message;
+        hasErrors = true;
+    }
+}
+
+function getInformation(event) {
+    event.preventDefault();
+    if (hasErrors) {
+        return;
+    }
+    try {
+        const fName = document.getElementById('first-name').value;
+        const lName = document.getElementById('last-name').value;
+        const dName = document.getElementById('display-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirmation = document.getElementById('password-confirmation').value;
+
+        if (fName === '' || lName === '' || dName === '' || email === '' || password === '' || passwordConfirmation === '') {
+            throw new Error('Please fill in all fields.');
+        }
+        const User = new Person(fName, lName, dName, email);
+        localStorage.setItem(lName, JSON.stringify(User));
+        errorInformation.textContent = '';
+    } catch (error) {
+        errorInformation.textContent = error.message;
+    }
+}
+
+document.getElementById('password').addEventListener('change', checkPassword);
+document.getElementById('password-confirmation').addEventListener('change', checkPassword);
+document.getElementById('email').addEventListener('change', validateEmail);
+document.getElementById('ok-button').addEventListener('click', getInformation);
